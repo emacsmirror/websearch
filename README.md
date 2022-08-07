@@ -1,4 +1,4 @@
-# Emacs-Search-Engine
+# Emacs-WebSearch
 
 
 ## About
