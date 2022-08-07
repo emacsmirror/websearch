@@ -1,0 +1,30 @@
+---
+
+
+variables:
+   GIT_SUBMODULE_STRATEGY: recursive
+   TERM: dumb
+
+
+stages:
+  - install
+
+image: debian:unstable
+
+before_script:
+  - apt update
+  - apt install -y emacs-nox make
+  - mkdir -p ~/.emacs.d
+  - make compile
+
+
+install:
+  stage: install
+
+  rules:
+    - changes:
+      - "*.el"
+      - .gitlab-ci.yml
+
+  script:
+    - make install
