@@ -7,6 +7,7 @@ variables:
 
 
 stages:
+  - build
   - install
 
 image: debian:unstable
@@ -15,7 +16,19 @@ before_script:
   - apt update
   - apt install -y emacs-nox make
   - mkdir -p ~/.emacs.d
-  - make compile
+
+
+build:
+  stage: build
+
+  rules:
+    - changes:
+      - "*.el"
+      - .gitlab-ci.yml
+      - Makefile
+
+  script:
+    - make
 
 
 install:
@@ -25,6 +38,7 @@ install:
     - changes:
       - "*.el"
       - .gitlab-ci.yml
+      - Makefile
 
   script:
     - make install
