@@ -63,6 +63,7 @@
     ("stackoverflow"    ?+  "stackoverflow.com/search?q=")
     ("twitter"          ?+  "twitter.com/search?q=")
     ("unicode-table"    ?+  "unicode-table.com/en/search/?q=")
+    ("urbandictionary"  ?+  "urbandictionary.com/define.php?term=")
     ("wikipedia-en"     ?_  "en.wikipedia.org/wiki/")
     ("wikipedia-pl"     ?_  "pl.wikipedia.org/wiki/")
     ("wolframalpha"     ?+  "wolframalpha.com/input/?i=")
