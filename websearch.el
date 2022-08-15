@@ -128,11 +128,13 @@ selected from completing read."
   "Form a full search URL query.
 
 Returns URL formed from formatted QUERY-URL, SEPARATOR and SEARCH-TERM."
-  (concat "https://"
-          query-url
-          (url-hexify-string (replace-regexp-in-string " "
-                                                       (string separator)
-                                                       search-term))))
+  (let ((query-search-term
+         (cond
+          ((equal separator ?\s)
+           search-term)
+          (t
+           (replace-regexp-in-string " " (string separator) search-term)))))
+    (concat "https://" query-url (url-hexify-string query-search-term))))
 
 (defun websearch--browse-url (search-term)
   "Browse the full query URL.
