@@ -53,6 +53,9 @@
 ;;; Code:
 
 
+(require 'cl-lib)
+(require 'subr-x)
+
 (require 'websearch-custom)
 
 
@@ -102,20 +105,24 @@ that is defined in Search-Engine package.")
   "Return value of PROPERTY from PROPERTIES."
   (cdr (assoc property properties)))
 
-(defun websearch--select-engine ()
+(defun websearch--select-engines ()
   "Return the query URL.
 
 URL is extracted from associated with search engine
 selected from completing read."
   (let* ((engine-names
           (websearch--engine-names))
-         (selected-engine
+         (selected-engine-string
           (completing-read "Search engine: "
                            engine-names
                            nil
-                           t
-                           websearch-custom-default-engine)))
-    (websearch--engine-properties selected-engine)))
+                           nil
+                           websearch-custom-default-engine))
+         (selected-engines
+          (mapcar #'string-trim
+                  (split-string selected-engine-string ","))))
+    (mapcar #'websearch--engine-properties
+            selected-engines)))
 
 (defun websearch--form-query (query-url separator search-term)
   "Form a full search URL query.
@@ -131,14 +138,24 @@ Returns URL formed from formatted QUERY-URL, SEPARATOR and SEARCH-TERM."
   "Browse the full query URL.
 
 SEARCH-TERM is given to a search engine selected interactively by the user."
-  (let* ((engine-properties
-          (websearch--select-engine))
-         (query-url
-          (websearch--property-value 'query-url engine-properties))
-         (separator
-          (websearch--property-value 'separator engine-properties)))
-    (funcall websearch-custom-browse-url-function
-             (websearch--form-query query-url separator search-term))))
+  (let* ((engines-properties
+          (websearch--select-engines))
+         (query-urls
+          (mapcar (lambda (engine)
+                    (websearch--property-value 'query-url engine))
+                  engines-properties))
+         (separators
+          (mapcar (lambda (engine)
+                    (websearch--property-value 'separator engine))
+                  engines-properties)))
+    (cl-mapc (lambda (query-url separator)
+               ;; TODO: Async? -- to open both at the same time.
+               (funcall websearch-custom-browse-url-function
+                        (websearch--form-query query-url
+                                               separator
+                                               search-term)))
+             query-urls
+             separators)))
 
 
 ;;;###autoload
