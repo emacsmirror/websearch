@@ -31,8 +31,10 @@
 
 
 (defcustom websearch-custom-engines
-  '(("c++-docs"         ?+  "cplusplus.com/search.do?q=")
+  '(("britannica"       ?\s "www.britannica.com/search?query=")
+    ("c++-docs"         ?+  "cplusplus.com/search.do?q=")
     ("codeberg"         ?+  "codeberg.org/explore/repos?q=")
+    ("dailymotion"      ?\s "https://www.dailymotion.com/search/")    
     ("die"              ?+  "www.die.net/search/?q=")
     ("django-docs"      ?+  "docs.djangoproject.com/en/4.0/search/?q=")
     ("duckduckgo"       ?+  "duckduckgo.com/?q=")
@@ -48,6 +50,7 @@
     ("julia-packages"   ?+  "juliapackages.com/packages?search=")
     ("melpa"            ?+  "melpa.org/#/?q=")
     ("melpa-stable"     ?+  "stable.melpa.org/#/?q=")
+    ("movie-archive"    ?+  "https://archive.org/details/movies?query=")
     ("odysee"           ?+  "odysee.com/$/search?q=")
     ("peertube"         ?+  "search.joinpeertube.org/search?search=")
     ("python-docs"      ?+  "docs.python.org/3/search.html?q=")
@@ -61,6 +64,7 @@
     ("rust-packages"    ?+  "crates.io/search?q=")
     ("softwareheritage" ?+  "archive.softwareheritage.org/browse/search/?q=")
     ("stackoverflow"    ?+  "stackoverflow.com/search?q=")
+    ("tiktok"           ?/s "https://www.tiktok.com/search?q=")
     ("twitter"          ?+  "twitter.com/search?q=")
     ("unicode-table"    ?+  "unicode-table.com/en/search/?q=")
     ("urbandictionary"  ?+  "urbandictionary.com/define.php?term=")
