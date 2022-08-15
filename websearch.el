@@ -114,9 +114,9 @@ selected from completing read."
           (websearch--engine-names))
          (selected-engine-string
           (completing-read "Search engine: "
-                           engine-names
+                           (append engine-names websearch-custom-groups)
                            nil
-                           nil
+                           t
                            websearch-custom-default-engine))
          (selected-engines
           (mapcar #'string-trim

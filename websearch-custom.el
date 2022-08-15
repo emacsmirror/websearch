@@ -82,6 +82,20 @@ Each element in this list is a list of three elements:
   :type '(repeat (list string string string))
   :group 'websearch)
 
+(defcustom websearch-custom-groups
+  '("google, duckduckgo, yandex"
+    "codeberg, github, gitlab, repology, softwareheritage")
+  "List of search engines to search at once.
+
+The engines are split by the \",\" (comma) separator.
+
+For example: \"google, duckduckgo, yandex\" means:
+search google, duckduckgo and yandex a the same time.
+
+This variable is used in the `websearch--select-engines'."
+  :type '(repeat string)
+  :group 'websearch)
+
 (defcustom websearch-custom-default-engine nil
   "Default search engine.
 
