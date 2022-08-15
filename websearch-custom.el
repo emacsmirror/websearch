@@ -76,7 +76,7 @@ Each element in this list is a list of three elements:
 - name of the search engine, string,
   for example: \"duckduckgo\" or \"wikipedia-en\",
 - separator used for queries, character,
-  for example: \"+\" or \"_\", string,
+  for example: ?+, ?_ or ?\s (space character),
 - query URL (without \"https://\" prefix),
   for example: \"duckduckgo.com/?q=\" or \"en.wikipedia.org/wiki/\"."
   :type '(repeat (list string string string))
