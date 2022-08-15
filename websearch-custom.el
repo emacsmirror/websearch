@@ -87,8 +87,9 @@ Each element in this list is a list of three elements:
   :group 'websearch)
 
 (defcustom websearch-custom-groups
-  '("google, duckduckgo, yandex"
-    "codeberg, github, gitlab, repology, softwareheritage")
+  '("codeberg, github, gitlab, repology, softwareheritage"
+    "google, duckduckgo, yandex"
+    "melpa, melpa-stable, repology")
   "List of search engines to search at once.
 
 The engines are split by the \",\" (comma) separator.
