@@ -77,9 +77,9 @@ Each element in this list is a list of three elements:
   for example: \"duckduckgo\" or \"wikipedia-en\",
 - separator used for queries, character,
   for example: ?+, ?_ or ?\s (space character),
-- query URL (without \"https://\" prefix),
+- query URL (without \"https://\" prefix), string,
   for example: \"duckduckgo.com/?q=\" or \"en.wikipedia.org/wiki/\"."
-  :type '(repeat (list string string string))
+  :type '(repeat (list string character string))
   :group 'websearch)
 
 (defcustom websearch-custom-groups
