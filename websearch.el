@@ -89,22 +89,6 @@ that is defined in Search-Engine package.")
   "Return value of METHOD-NAME from ‘websearch-methods’."
   (cdr (assoc method-name websearch-methods)))
 
-(defun websearch--engine-names ()
-  "Return the names of ‘websearch-engines’."
-  (mapcar #'car websearch-custom-engines))
-
-(defun websearch--engine-properties (engine-name)
-  "Return engine properties associated with ENGINE-NAME."
-  (let ((properties-list
-         (assoc engine-name websearch-custom-engines)))
-    `((name      . ,(nth 0 properties-list))
-      (separator . ,(nth 1 properties-list))
-      (query-url . ,(nth 2 properties-list)))))
-
-(defun websearch--property-value (property properties)
-  "Return value of PROPERTY from PROPERTIES."
-  (cdr (assoc property properties)))
-
 (defun websearch--select-engines ()
   "Return the query URL.
 
@@ -114,15 +98,24 @@ selected from completing read."
           (websearch--engine-names))
          (selected-engine-string
           (completing-read "Search engine: "
-                           (append engine-names websearch-custom-groups)
+                           (append websearch-custom-groups
+                                   (websearch--all-tags-encoded)
+                                   engine-names)
                            nil
                            t
                            websearch-custom-default-engine))
          (selected-engines
-          (mapcar #'string-trim
-                  (split-string selected-engine-string ","))))
-    (mapcar #'websearch--engine-properties
-            selected-engines)))
+          (let ((tag
+                 (websearch--decode-tag selected-engine-string)))
+            (cond
+             (tag
+              (websearch--tag-matches tag))
+             (t
+              (mapcar (lambda (engine-name)
+                        (assoc (string-trim engine-name)
+                               websearch-custom-engines))
+                      (split-string selected-engine-string ",")))))))
+    selected-engines))
 
 (defun websearch--form-query (query-url separator search-term)
   "Form a full search URL query.
@@ -140,16 +133,12 @@ Returns URL formed from formatted QUERY-URL, SEPARATOR and SEARCH-TERM."
   "Browse the full query URL.
 
 SEARCH-TERM is given to a search engine selected interactively by the user."
-  (let* ((engines-properties
+  (let* ((engines
           (websearch--select-engines))
          (query-urls
-          (mapcar (lambda (engine)
-                    (websearch--property-value 'query-url engine))
-                  engines-properties))
+          (mapcar (lambda (engine) (nth 2 engine)) engines))
          (separators
-          (mapcar (lambda (engine)
-                    (websearch--property-value 'separator engine))
-                  engines-properties)))
+          (mapcar (lambda (engine) (nth 1 engine)) engines)))
     (cl-mapc (lambda (query-url separator)
                ;; TODO: Async? -- to open both at the same time.
                (funcall websearch-custom-browse-url-function

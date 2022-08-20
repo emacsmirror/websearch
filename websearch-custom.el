@@ -31,59 +31,67 @@
 
 
 (defcustom websearch-custom-engines
-  '(("britannica"       ?\s "www.britannica.com/search?query=")
-    ("c++-docs"         ?+  "cplusplus.com/search.do?q=")
-    ("codeberg"         ?+  "codeberg.org/explore/repos?q=")
-    ("dailymotion"      ?\s "www.dailymotion.com/search/")
-    ("die"              ?+  "www.die.net/search/?q=")
+  '(("britannica"       ?\s "www.britannica.com/search?query=" (dictionary))
+    ("c++-docs"         ?+  "cplusplus.com/search.do?q=" ())
+    ("codeberg"         ?+  "codeberg.org/explore/repos?q=" (code-forge))
+    ("dailymotion"      ?\s "www.dailymotion.com/search/" (video))
+    ("die"              ?+  "www.die.net/search/?q=" ())
     ("django-docs"      ?+  "docs.djangoproject.com/en/4.0/search/?q=")
-    ("duckduckgo"       ?+  "duckduckgo.com/?q=")
-    ("gentoo-bugs"      ?+  "bugs.gentoo.org/buglist.cgi?quicksearch=")
-    ("gentoo-overlays"  ?+  "gpo.zugaina.org/Search?search=")
-    ("gentoo-packages"  ?+  "packages.gentoo.org/packages/search?q=")
-    ("gentoo-wiki"      ?+  "wiki.gentoo.org/index.php?search=")
-    ("github"           ?+  "github.com/search?q=")
-    ("gitlab"           ?+  "gitlab.com/search?search=")
-    ("google"           ?+  "google.com/search?q=")
-    ("google-maps"      ?+  "maps.google.com/maps?q=")
-    ("julia-docs"       ?+  "docs.julialang.org/en/v1/search/?q=")
-    ("julia-packages"   ?+  "juliapackages.com/packages?search=")
-    ("melpa"            ?+  "melpa.org/#/?q=")
-    ("melpa-stable"     ?+  "stable.melpa.org/#/?q=")
-    ("movie-archive"    ?+  "archive.org/details/movies?query=")
-    ("odysee"           ?+  "odysee.com/$/search?q=")
-    ("peertube"         ?+  "search.joinpeertube.org/search?search=")
-    ("python-docs"      ?+  "docs.python.org/3/search.html?q=")
-    ("python-packages"  ?+  "pypi.org/search/?q=")
-    ("qwant"            ?+  "qwant.com/?q=")
-    ("sjp"              ?\s "sjp.pwn.pl/slowniki/")  ; Polish dictionary
-    ("racket-docs"      ?\s "docs.racket-lang.org/search/index.html?q=")
-    ("racket-packages"  ?+  "pkgd.racket-lang.org/pkgn/search?q=")
-    ("reddit"           ?+  "reddit.com/search/?q=")
-    ("repology"         ?-  "repology.org/projects/?search=")
-    ("rust-packages"    ?+  "crates.io/search?q=")
-    ("softwareheritage" ?+  "archive.softwareheritage.org/browse/search/?q=")
-    ("stackoverflow"    ?+  "stackoverflow.com/search?q=")
-    ("tiktok"           ?\s "www.tiktok.com/search?q=")
-    ("twitter"          ?+  "twitter.com/search?q=")
-    ("unicode-table"    ?+  "unicode-table.com/en/search/?q=")
-    ("urbandictionary"  ?+  "urbandictionary.com/define.php?term=")
-    ("wikipedia-en"     ?_  "en.wikipedia.org/wiki/")
-    ("wikipedia-pl"     ?_  "pl.wikipedia.org/wiki/")
-    ("wolframalpha"     ?+  "wolframalpha.com/input/?i=")
-    ("yandex"           ?+  "yandex.com/search/?text=")
-    ("yewtube"          ?+  "yewtu.be/search?q=")  ; just a Invidious instance ;-)
-    ("youtube"          ?+  "youtube.com/results?search_query="))
+    ("duckduckgo"       ?+  "duckduckgo.com/?q=" (generic))
+    ("gentoo-bugs"      ?+  "bugs.gentoo.org/buglist.cgi?quicksearch=" (bugs))
+    ("gentoo-overlays"  ?+  "gpo.zugaina.org/Search?search=" ())
+    ("gentoo-packages"  ?+  "packages.gentoo.org/packages/search?q=" ())
+    ("gentoo-wiki"      ?+  "wiki.gentoo.org/index.php?search=" ())
+    ("github"           ?+  "github.com/search?q=" (code-forge))
+    ("gitlab"           ?+  "gitlab.com/search?search=" (code-forge))
+    ("google"           ?+  "google.com/search?q=" (generic))
+    ("google-maps"      ?+  "maps.google.com/maps?q=" (geography))
+    ("julia-docs"       ?+  "docs.julialang.org/en/v1/search/?q=" (julia))
+    ("julia-packages"   ?+  "juliapackages.com/packages?search=" (julia))
+    ("melpa"            ?+  "melpa.org/#/?q=" (melpa))
+    ("melpa-stable"     ?+  "stable.melpa.org/#/?q=" (melpa))
+    ("movie-archive"    ?+  "archive.org/details/movies?query=" (video))
+    ("odysee"           ?+  "odysee.com/$/search?q=" (video))
+    ("peertube"         ?+  "search.joinpeertube.org/search?search=" (video))
+    ("python-docs"      ?+  "docs.python.org/3/search.html?q=" (python))
+    ("python-packages"  ?+  "pypi.org/search/?q=" (python))
+    ("qwant"            ?+  "qwant.com/?q=" (generic))
+    ("sjp"              ?\s "sjp.pwn.pl/slowniki/" (dictionary))  ; Polish dictionary
+    ("racket-docs"      ?\s "docs.racket-lang.org/search/index.html?q=" (racket))
+    ("racket-packages"  ?+  "pkgd.racket-lang.org/pkgn/search?q=" (racket))
+    ("reddit"           ?+  "reddit.com/search/?q=" (social-media))
+    ("repology"         ?-  "repology.org/projects/?search=" ())
+    ("rust-packages"    ?+  "crates.io/search?q=" (rust))
+    ("softwareheritage" ?+  "archive.softwareheritage.org/browse/search/?q=" (code-forge))
+    ("stackoverflow"    ?+  "stackoverflow.com/search?q=" (bugs))
+    ("tiktok"           ?\s "www.tiktok.com/search?q=" (video))
+    ("twitter"          ?+  "twitter.com/search?q=" (social-media))
+    ("unicode-table"    ?+  "unicode-table.com/en/search/?q=" ())
+    ("urbandictionary"  ?+  "urbandictionary.com/define.php?term=" (dictionary))
+    ("wikipedia-en"     ?_  "en.wikipedia.org/wiki/" (dictionary))
+    ("wikipedia-pl"     ?_  "pl.wikipedia.org/wiki/" (dictionary))
+    ("wolframalpha"     ?+  "wolframalpha.com/input/?i=" ())
+    ("yandex"           ?+  "yandex.com/search/?text=" (generic))
+    ("yewtube"          ?+  "yewtu.be/search?q=" (video))  ; just a Invidious instance ;-)
+    ("youtube"          ?+  "youtube.com/results?search_query=" (video)))
   "List of supported search engines.
 
-Each element in this list is a list of three elements:
+Each element in this list is a list of four elements:
 - name of the search engine, string,
   for example: \"duckduckgo\" or \"wikipedia-en\",
 - separator used for queries, character,
   for example: ?+, ?_ or ?\s (space character),
 - query URL (without \"https://\" prefix), string,
-  for example: \"duckduckgo.com/?q=\" or \"en.wikipedia.org/wiki/\"."
-  :type '(repeat (list string character string))
+  for example: \"duckduckgo.com/?q=\" or \"en.wikipedia.org/wiki/\"
+- tags, list of symbols,
+  tags should be as genral as possible but at the same time as \"specialized\"
+  as possible.
+  Because they are used to search all sources at once it would make little
+  sense to, for example, search both python & racket package repositories
+  when using a \"packages\" tag.
+  For example: (dictionary), (video).
+  Actually '(dictionary), but the search engines list is already quoted."
+  :type '(repeat (list string character string (repeat symbol)))
   :group 'websearch)
 
 (defcustom websearch-custom-groups
@@ -130,6 +138,49 @@ Can be set to any name of a search engine from ‘websearch-custom-engines’."
   "Keymap prefix for ‘websearch-mode’."
   :type 'string
   :group 'websearch)
+
+
+(defun websearch--engine-names ()
+  "Return the names of ‘websearch-engines’."
+  (mapcar #'car websearch-custom-engines))
+
+(defun websearch--tag-matches (tag)
+  "Return search engines with a matching TAG."
+  (mapcan (lambda (engine)
+            (cond
+             ((member tag (nth 3 engine))
+              (list engine))
+             (t
+              nil)))
+          websearch-custom-engines))
+
+(defun websearch--encode-tag (tag)
+  "Return a encoded TAG."
+  (concat "#" (symbol-name tag)))
+
+(defun websearch--decode-tag (encoded-tag)
+  "Return a decoded ENCODED-TAG."
+  (cond
+   ((string-prefix-p "#" encoded-tag)
+    (intern (replace-regexp-in-string "^#" "" encoded-tag)))
+   (t
+    nil)))
+
+(defun websearch--all-tags ()
+  "Return all tags available in ‘websearch-custom-engines’."
+  (let ((tags '()))
+    (mapc (lambda (engine)
+            (mapc (lambda (tag)
+                    (add-to-list 'tags tag))
+                  (nth 3 engine)))
+          websearch-custom-engines)
+    tags))
+
+(defun websearch--all-tags-encoded ()
+  "Return all encoded tags available in ‘websearch-custom-engines’.
+
+The tags are encoded with the `websearch--encode-tag' function."
+  (sort (mapcar #'websearch--encode-tag (websearch--all-tags)) #'string<))
 
 
 (provide 'websearch-custom)

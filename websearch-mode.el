@@ -58,7 +58,8 @@
   (setq tabulated-list-format
         [("Name"      20 t)
          ("Separator" 10 t)
-         ("Query URL" 60 t)])
+         ("Query URL" 60 t)
+         ("Tags"      30 t)])
   (setq tabulated-list-sort-key (cons "Name" nil))
   (setq tabulated-list-entries
         (let ((index 0))
@@ -67,7 +68,8 @@
                     (list index
                           (vector (nth 0 entry)
                                   (format "\"%c\"" (nth 1 entry))
-                                  (concat "https://" (nth 2 entry)))))
+                                  (concat "https://" (nth 2 entry))
+                                  (mapconcat #'symbol-name (nth 3 entry) " "))))
                   websearch-custom-engines)))
   (tabulated-list-init-header)
   (tabulated-list-print t))
