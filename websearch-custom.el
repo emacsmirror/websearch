@@ -31,7 +31,8 @@
 
 
 (defcustom websearch-custom-engines
-  '(("britannica"       ?\s "www.britannica.com/search?query=" (dictionary))
+  '(("anarchist-library"?+ "theanarchistlibrary.org/search?query=" (archive))
+    ("britannica"       ?\s "www.britannica.com/search?query=" (dictionary))
     ("c++-docs"         ?+  "cplusplus.com/search.do?q=" ())
     ("codeberg"         ?+  "codeberg.org/explore/repos?q=" (code-forge))
     ("dailymotion"      ?\s "www.dailymotion.com/search/" (video))
@@ -50,7 +51,7 @@
     ("julia-packages"   ?+  "juliapackages.com/packages?search=" (julia))
     ("melpa"            ?+  "melpa.org/#/?q=" (melpa))
     ("melpa-stable"     ?+  "stable.melpa.org/#/?q=" (melpa))
-    ("movie-archive"    ?+  "archive.org/details/movies?query=" (video))
+    ("movie-archive"    ?+  "archive.org/details/movies?query=" (archive video))
     ("odysee"           ?+  "odysee.com/$/search?q=" (video))
     ("peertube"         ?+  "search.joinpeertube.org/search?search=" (video))
     ("python-docs"      ?+  "docs.python.org/3/search.html?q=" (python))
@@ -62,7 +63,7 @@
     ("reddit"           ?+  "reddit.com/search/?q=" (social-media))
     ("repology"         ?-  "repology.org/projects/?search=" ())
     ("rust-packages"    ?+  "crates.io/search?q=" (rust))
-    ("softwareheritage" ?+  "archive.softwareheritage.org/browse/search/?q=" (code-forge))
+    ("softwareheritage" ?+  "archive.softwareheritage.org/browse/search/?q=" (archive code-forge))
     ("stackoverflow"    ?+  "stackoverflow.com/search?q=" (bugs))
     ("tiktok"           ?\s "www.tiktok.com/search?q=" (video))
     ("twitter"          ?+  "twitter.com/search?q=" (social-media))
