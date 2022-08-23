@@ -47,6 +47,7 @@
     ("gitlab"           ?+  "gitlab.com/search?search=" (code-forge))
     ("google"           ?\s "google.com/search?q=" (generic))
     ("google-maps"      ?+  "maps.google.com/maps?q=" (geography))
+    ("imdb"             ?+  "imdb.com/find?q=" (video))
     ("julia-docs"       ?+  "docs.julialang.org/en/v1/search/?q=" (julia))
     ("julia-packages"   ?+  "juliapackages.com/packages?search=" (julia))
     ("melpa"            ?+  "melpa.org/#/?q=" (melpa))
