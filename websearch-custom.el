@@ -58,12 +58,12 @@
     ("python-docs"      ?+  "docs.python.org/3/search.html?q=" (text python))
     ("python-packages"  ?+  "pypi.org/search/?q=" (text python))
     ("qwant"            ?\s "qwant.com/?q=" (text generic))
-    ("sjp"              ?\s "sjp.pwn.pl/slowniki/" (text dictionary))  ; Polish dictionary
     ("racket-docs"      ?\s "docs.racket-lang.org/search/index.html?q=" (text racket))
     ("racket-packages"  ?+  "pkgd.racket-lang.org/pkgn/search?q=" (text racket))
     ("reddit"           ?+  "reddit.com/search/?q=" (text social-media))
     ("repology"         ?-  "repology.org/projects/?search=" (text))
     ("rust-packages"    ?+  "crates.io/search?q=" (text rust))
+    ("sjp"              ?\s "sjp.pwn.pl/slowniki/" (text dictionary))
     ("softwareheritage" ?+  "archive.softwareheritage.org/browse/search/?q=" (text archive code-forge))
     ("stackoverflow"    ?+  "stackoverflow.com/search?q=" (text bugs))
     ("tiktok"           ?\s "www.tiktok.com/search?q=" (video social-media))
@@ -74,7 +74,7 @@
     ("wikipedia-pl"     ?_  "pl.wikipedia.org/wiki/" (text dictionary))
     ("wolframalpha"     ?+  "wolframalpha.com/input/?i=" (text))
     ("yandex"           ?\s "yandex.com/search/?text=" (text generic))
-    ("yewtube"          ?+  "yewtu.be/search?q=" (video))  ; just a Invidious instance ;-)
+    ("yewtube"          ?+  "yewtu.be/search?q=" (video))
     ("youtube"          ?+  "youtube.com/results?search_query=" (video)))
   "List of supported search engines.
 
