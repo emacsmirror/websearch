@@ -1,0 +1,9 @@
+;; -*- mode: emacs-lisp; lexical-binding: t -*-
+
+(eldev-use-package-archive 'melpa)
+
+(setf eldev-project-main-file
+      "./websearch.el")
+
+(setf eldev-standard-excludes
+      `(:or ,eldev-standard-excludes "./extras"))
