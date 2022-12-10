@@ -18,7 +18,7 @@
 Query search engines from Emacs.
 
 <p align="center">
-    <img src="logo.png">
+    <img src="logo.png" width="250" height="250">
 </p>
 
 
