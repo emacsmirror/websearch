@@ -1,7 +1,10 @@
 PWD         ?= $(shell pwd)
 
+ELS          = $(wildcard $(PWD)/*.el)
+ELCS         = $(ELS:.el=.elc)
+
 EMACS       := emacs
-FIND        := find
+FIND        := rm -f
 
 EMACFLAGS   := --batch -q --no-site-file -L $(PWD)
 EMACSCMD     = $(EMACS) $(EMACFLAGS)
@@ -10,18 +13,15 @@ EMACSCMD     = $(EMACS) $(EMACFLAGS)
 .PHONY: all
 all: clean compile
 
-
 .PHONY: clean
 clean:
-	$(FIND) $(PWD) -iname "*.elc" -delete
-
+	$(RM) $(ELCS)
 
 %.elc:
 	$(EMACSCMD) --eval "(byte-compile-file \"$(*).el\" 0)"
 
 .PHONY: compile
-compile: websearch.elc websearch-custom.elc websearch-mode.elc
-
+compile: $(ELCS)
 
 .PHONY: install
 install: compile
