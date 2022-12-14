@@ -1,22 +1,23 @@
 ;;; websearch.el --- Query search engines -*- lexical-binding: t -*-
 
 
-;; This file is part of emacs-websearch.
+;; This file is part of websearch - query search engines from Emacs.
+;; Copyright (c) 2022, Maciej Barć <xgqt@riseup.net>
+;; Licensed under the GNU GPL v2 License
+;; SPDX-License-Identifier: GPL-2.0-or-later
 
-;; emacs-websearch is free software: you can redistribute it and/or modify
+;; websearch is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, version 3.
+;; the Free Software Foundation, either version 2 of the License, or
+;; (at your option) any later version.
 
-;; emacs-websearch is distributed in the hope that it will be useful,
+;; websearch is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; GNU General Public License for more details.
 
 ;; You should have received a copy of the GNU General Public License
-;; along with emacs-websearch.  If not, see <https://www.gnu.org/licenses/>.
-
-;; Copyright (c) 2022, Maciej Barć <xgqt@riseup.net>
-;; Licensed under the GNU GPL v3 License
+;; along with websearch.  If not, see <https://www.gnu.org/licenses/>.
 
 
 ;; Author: Maciej Barć <xgqt@riseup.net>
@@ -24,7 +25,7 @@
 ;; Version: 2.0.0
 ;; Keywords: convenience hypermedia
 ;; Package-Requires: ((emacs "24.4"))
-;; SPDX-License-Identifier: GPL-3.0-only
+;; SPDX-License-Identifier: GPL-2.0-or-later
 
 
 
