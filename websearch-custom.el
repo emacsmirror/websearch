@@ -2,7 +2,7 @@
 
 
 ;; This file is part of websearch - query search engines from Emacs.
-;; Copyright (c) 2022, Maciej Barć <xgqt@riseup.net>
+;; Copyright (c) 2022-2023, Maciej Barć <xgqt@riseup.net>
 ;; Licensed under the GNU GPL v2 License
 ;; SPDX-License-Identifier: GPL-2.0-or-later
 

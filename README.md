@@ -42,7 +42,7 @@ for it to be it's own package.
 
 ## License
 
-Copyright (c) 2022, Maciej Barć <xgqt@riseup.net>
+Copyright (c) 2022-2023, Maciej Barć <xgqt@riseup.net>
 
 Licensed under the GNU GPL v2 License
 
