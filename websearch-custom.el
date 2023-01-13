@@ -32,7 +32,7 @@
 
 
 (defcustom websearch-custom-engines
-  '(("anarchist-library"?+ "theanarchistlibrary.org/search?query=" (text archive))
+  '(("anarchist-library"?+  "theanarchistlibrary.org/search?query=" (text archive))
     ("britannica"       ?\s "www.britannica.com/search?query=" (text dictionary))
     ("c++-docs"         ?+  "cplusplus.com/search.do?q=" (text))
     ("codeberg"         ?+  "codeberg.org/explore/repos?q=" (text code-forge))
@@ -77,6 +77,7 @@
     ("yandex"           ?\s "yandex.com/search/?text=" (text generic))
     ("yewtube"          ?+  "yewtu.be/search?q=" (video))
     ("youtube"          ?+  "youtube.com/results?search_query=" (video)))
+
   "List of supported search engines.
 
 Each element in this list is a list of four elements:
@@ -84,6 +85,7 @@ Each element in this list is a list of four elements:
   for example: \"duckduckgo\" or \"wikipedia-en\",
 - separator used for queries, character,
   for example: ?+, ?_ or ?\s (space character),
+  may also be a string \"+\", \"_\" or \" \" (space character),
 - query URL (without \"https://\" prefix), string,
   for example: \"duckduckgo.com/?q=\" or \"en.wikipedia.org/wiki/\"
 - tags, list of symbols,
