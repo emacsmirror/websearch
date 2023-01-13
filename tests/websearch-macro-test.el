@@ -56,7 +56,7 @@
                                             websearch-youtube
                                             websearch-group-google-reddit-youtube
                                             websearch-group-youtube-odysee-peertube-dailymotion-yewtube
-                                            websearch-group-wolframalpha-wikipedia-en-anarchist-library
+                                            websearch-group-wolframalpha-wikipedia-en-anarchistlibrary
                                             websearch-group-codeberg-github-gitlab-repology-softwareheritage
                                             websearch-group-google-duckduckgo-yandex
                                             websearch-group-melpa-melpa-stable-repology))
@@ -99,11 +99,11 @@
                           :function nil)
   (websearch-define-group "youtube, odysee, peertube, dailymotion, yewtube"
                           :function nil)
-  (websearch-define-group "wolframalpha, wikipedia-en, anarchist-library"
+  (websearch-define-group "wolframalpha, wikipedia-en, anarchistlibrary"
                           :function nil)
   (should (member "google, reddit, youtube" websearch-custom-groups))
   (should (member "youtube, odysee, peertube, dailymotion, yewtube" websearch-custom-groups))
-  (should (member "wolframalpha, wikipedia-en, anarchist-library" websearch-custom-groups)))
+  (should (member "wolframalpha, wikipedia-en, anarchistlibrary" websearch-custom-groups)))
 
 (ert-deftest websearch-macro-engine-function-p-test ()
   (websearch-define "brave")
@@ -120,13 +120,13 @@
 (ert-deftest websearch-macro-group-function-p-test ()
   (websearch-define-group "google, reddit, youtube")
   (websearch-define-group "youtube, odysee, peertube, dailymotion, yewtube")
-  (websearch-define-group "wolframalpha, wikipedia-en, anarchist-library")
+  (websearch-define-group "wolframalpha, wikipedia-en, anarchistlibrary")
   (websearch-define-group "codeberg, github, gitlab, repology, softwareheritage")
   (websearch-define-group "google, duckduckgo, yandex")
   (websearch-define-group "melpa, melpa-stable, repology")
   (should (functionp 'websearch-group-google-reddit-youtube))
   (should (functionp 'websearch-group-youtube-odysee-peertube-dailymotion-yewtube))
-  (should (functionp 'websearch-group-wolframalpha-wikipedia-en-anarchist-library))
+  (should (functionp 'websearch-group-wolframalpha-wikipedia-en-anarchistlibrary))
   (should (functionp 'websearch-group-codeberg-github-gitlab-repology-softwareheritage))
   (should (functionp 'websearch-group-google-duckduckgo-yandex))
   (should (functionp 'websearch-group-melpa-melpa-stable-repology)))
@@ -156,7 +156,7 @@
                           :keybinding "! g")
   (websearch-define-group "youtube, odysee, peertube, dailymotion, yewtube"
                           :keybinding "! y")
-  (websearch-define-group "wolframalpha, wikipedia-en, anarchist-library"
+  (websearch-define-group "wolframalpha, wikipedia-en, anarchistlibrary"
                           :keybinding "! w")
   (websearch-define-group "codeberg, github, gitlab, repology, softwareheritage"
                           :keybinding "! c")
@@ -166,7 +166,7 @@
                           :keybinding "! m")
   (should (eq (key-binding (kbd (format "%s %s " websearch-custom-keymap-prefix "! g"))) 'websearch-group-google-reddit-youtube))
   (should (eq (key-binding (kbd (format "%s %s " websearch-custom-keymap-prefix "! y"))) 'websearch-group-youtube-odysee-peertube-dailymotion-yewtube))
-  (should (eq (key-binding (kbd (format "%s %s " websearch-custom-keymap-prefix "! w"))) 'websearch-group-wolframalpha-wikipedia-en-anarchist-library))
+  (should (eq (key-binding (kbd (format "%s %s " websearch-custom-keymap-prefix "! w"))) 'websearch-group-wolframalpha-wikipedia-en-anarchistlibrary))
   (should (eq (key-binding (kbd (format "%s %s " websearch-custom-keymap-prefix "! c"))) 'websearch-group-codeberg-github-gitlab-repology-softwareheritage))
   (should (eq (key-binding (kbd (format "%s %s " websearch-custom-keymap-prefix "! s"))) 'websearch-group-google-duckduckgo-yandex))
   (should (eq (key-binding (kbd (format "%s %s " websearch-custom-keymap-prefix "! m"))) 'websearch-group-melpa-melpa-stable-repology)))
