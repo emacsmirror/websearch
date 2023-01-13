@@ -56,7 +56,7 @@
 
 (require 'cl-lib)
 (require 'subr-x)
-
+(require 'browse-url)
 (require 'websearch-custom)
 
 
@@ -90,21 +90,23 @@ that is defined in Search-Engine package.")
   "Return value of METHOD-NAME from ‘websearch-methods’."
   (cdr (assoc method-name websearch-methods)))
 
-(defun websearch--select-engines ()
+(defun websearch--select-engines (&optional selected-engine-string)
   "Return the query URL.
 
-URL is extracted from associated with search engine
-selected from completing read."
+URL is extracted from associated with SELECTED-ENGINE-STRING
+or from completing read."
   (let* ((engine-names
           (websearch--engine-names))
          (selected-engine-string
-          (completing-read "Search engine: "
-                           (append websearch-custom-groups
-                                   (websearch--all-tags-encoded)
-                                   engine-names)
-                           nil
-                           t
-                           websearch-custom-default-engine))
+          (if selected-engine-string
+              selected-engine-string
+            (completing-read "Search engine: "
+                             (append websearch-custom-groups
+                                     (websearch--all-tags-encoded)
+                                     engine-names)
+                             nil
+                             t
+                             websearch-custom-default-engine)))
          (selected-engines
           (let ((tag
                  (websearch--decode-tag selected-engine-string)))
@@ -124,18 +126,20 @@ selected from completing read."
 Returns URL formed from formatted QUERY-URL, SEPARATOR and SEARCH-TERM."
   (let ((query-search-term
          (cond
-          ((equal separator ?\s)
+          ((or (equal separator ?\s) (equal separator " "))
            search-term)
           (t
-           (replace-regexp-in-string " " (string separator) search-term)))))
+           (replace-regexp-in-string " " (if (stringp separator) separator (string separator)) search-term)))))
     (concat "https://" query-url (url-hexify-string query-search-term))))
 
-(defun websearch--browse-url (search-term)
+(defun websearch--browse-url (search-term &optional engines)
   "Browse the full query URL.
 
-SEARCH-TERM is given to a search engine selected interactively by the user."
+SEARCH-TERM is given to a search ENGINES given directly to function
+or selected interactively by the user."
   (let* ((engines
-          (websearch--select-engines))
+          (if engines (websearch--select-engines engines)
+            (websearch--select-engines)))
          (query-urls
           (mapcar (lambda (engine) (nth 2 engine)) engines))
          (separators
@@ -149,6 +153,152 @@ SEARCH-TERM is given to a search engine selected interactively by the user."
              query-urls
              separators)))
 
+;;;###autoload
+(cl-defmacro websearch-define (engine-name &key docstring keybinding (function t) query-separator query-url (tags '("generic")))
+  "Define a dwim function to search the web using `websearch'.
+Unless called with FUNCTION as nil, then only add to `websearch-custom-engines'
+It will call `websearch' with the selected region, or if no region is selected
+promt the user for completion with `thing-at-point' if point is on something,
+and last kill or if called with a prefix arg will bring up full `kill-ring'
+history.
+
+The function will be named websearch-ENGINE-NAME where ENGINE-NAME
+corresponds to an item from `websearch-custom-engines'
+DOCSTRING if supplied is applied to the variable.
+If KEYBINDING is given bind the function to KEYBINDING.
+If QUERY-SEPARATOR QUERY-URL and TAGS are given add them to
+`websearch-custom-engines' TAGS should be passed as an unquoted list
+i.e. \":tags (\"text\" \"generic\")\""
+  (declare (indent 2)
+           (doc-string 3))
+  (cl-assert (stringp engine-name))
+  (let* ((engine-name-sym (intern engine-name))
+         (tagp (string-match-p "#" engine-name))
+         (query-separator (when query-separator query-separator))
+         (tags (when tags (mapcar 'intern tags)))
+         (engine-list (list engine-name query-separator query-url tags))
+         (engine-group  (string-match-p "," engine-name))
+         (func-name (concat "websearch-" (replace-regexp-in-string ", \\|," "-" engine-name)))
+         (func (intern func-name)))
+    (when (and query-separator query-url tags (not (or tagp engine-group))) (add-to-list 'websearch-custom-engines engine-list))
+    (if tagp
+        (unless (member engine-name (websearch--all-tags-encoded))
+          (user-error "\"%s\" not a tag from `websearch-custom-engines'" engine-name))
+      (unless (assoc engine-name websearch-custom-engines)
+        (user-error "\"%s\" not a member of `websearch-custom-engines'
+Please check your spelling, or add QUERY-SEPARATOR, QUERY-URL and TAGS to add
+%s to `websearch-custom-engines'" engine-name engine-name)))
+    (when (and function keybinding)
+      (funcall (lambda (func)
+                 (define-key websearch-mode-map
+                             (kbd (concat websearch-custom-keymap-prefix " " keybinding)) func))
+               func))
+    (when function
+      `(progn
+         (defun ,func (search-term &optional arg)
+           ,(concat docstring (when docstring "\n")
+                    (format "Search %s for SEARCH-TERM with `websearch'.
+SEARCH-TERM is region if region is selected.
+When called with prefix ARG use `kill-ring' for completions"
+                            (capitalize engine-name)))
+           (interactive
+            (let* ((arg current-prefix-arg)
+                   (region (if (use-region-p) (buffer-substring-no-properties (region-beginning) (region-end))))
+                   (kill (mapcar #'substring-no-properties kill-ring))
+                   (thing-at-point (when (thing-at-point 'symbol) (substring-no-properties (thing-at-point 'symbol))))
+                   (completions (if arg kill
+                                  (remove nil(delete-dups
+                                              (list thing-at-point kill))))))
+              (if (use-region-p) (list region) (list (completing-read "Search term: " completions)))))
+           (websearch--browse-url search-term ,engine-name))))))
+
+;;;###autoload
+(cl-defmacro websearch-define-group (group-name &key keybinding (function t) docstring)
+  "Define a new function for searching a group of web engines using `websearch'.
+function.  The function takes the following keyword arguments:
+
+GROUP-NAME: a string that contains a list of engine names separated by
+commas (e.g. \"google, duckduckgo, yandex\").
+
+KEYBINDING: (OPTIONAL) A KEYBINDING TO BIND THE FUNCTION TO.
+
+FUNCTION: (optional) a boolean that specifies whether the function should be
+defined (defaults to t).
+
+DOCSTRING: (optional) a string that is used as the function's documentation.
+
+The macro first checks if the group-name is properly formatted (i.e. that it
+contains a comma) and if the group is already defined in
+`websearch-custom-groups'. If the group is not properly formatted, or if the
+group is not defined, the macro generates an error.
+
+If the FUNCTION argument is t (default), the macro defines a new function called
+websearch-group-GROUP-NAME where GROUP-NAME is the GROUP-NAME argument with the
+commas replaced by dashes. The function takes two arguments: SEARCH-TERM and
+arg. The SEARCH-TERM is the term to be searched and arg is an optional prefix
+argument.
+
+The function is interactive and prompts the user for input. If the region is
+active, it uses the selected text as the search-term. If prifix-arg is passed,
+it uses the kill-ring for completions. If neither is the case, it uses the
+thing-at-point and the car of the kill-ring for completions.
+
+After the user inputs a search term, the function calls `websearch--browse-url'
+with the SEARCH-TERM and GROUP-NAME as arguments.
+
+If a KEYBINDING is passed, the macro binds the newly defined function
+to the specified key."
+  (declare (indent 2)
+           (docstring 3))
+  (let* ((commap (string-match-p "," group-name))
+         (func-name (concat "websearch-group-" (replace-regexp-in-string ", \\|," "-" group-name)))
+         (func (intern func-name))
+         (group-defined-p (member group-name websearch-custom-groups))
+         (group-engines (split-string group-name ", \\|,"))
+         (group-engines-p (eq (length group-engines) (length (remove nil (mapcar (lambda (engine)
+                                                                                   (assoc engine websearch-custom-engines))
+                                                                                 group-engines))))))
+    (unless commap
+      (user-error "Group not properly named, should be separated with a comma
+e.g. \"google, duckduckgo, yandex\""))
+    (unless group-defined-p
+      (if group-engines-p
+          (push group-name websearch-custom-groups)
+        (let ((non-engines (remove nil (mapcar (lambda (engine)
+                                                 (when (not (assoc engine websearch-custom-engines))
+                                                   engine))
+                                               group-engines))))
+          (user-error "\"%s\" not a member of `websearch-custom-engines'
+Pleas add %s to `websearch-custom-engines' and try again" non-engines
+non-engines))))
+    (when (and function keybinding)
+      (funcall (lambda (func)
+                 (define-key websearch-mode-map
+                             (kbd (concat websearch-custom-keymap-prefix " " keybinding)) func))
+               func))
+    (when function
+      `(progn
+         (defun ,func (search-term &optional arg)
+           ,(concat docstring (when docstring "\n")
+                    (format "Search %s for SEARCH-TERM with `websearch'.
+SEARCH-TERM is region if region is selected.
+When called with prefix ARG use `kill-ring' for completions"
+                            (let* ((split-group (split-string group-name ", \\|,"))
+                                   (last-engine (car (last split-group)))
+                                   (upcased-group (mapconcat (lambda (x) (capitalize x)) split-group ", "))
+                                   (formatted-group (concat (replace-regexp-in-string (concat ", " last-engine) (concat " & " (capitalize last-engine))
+                                                                                      upcased-group))))
+                              formatted-group)))
+           (interactive
+            (let* ((arg current-prefix-arg)
+                   (region (if (use-region-p) (buffer-substring-no-properties (region-beginning) (region-end))))
+                   (kill (mapcar #'substring-no-properties kill-ring))
+                   (thing-at-point (when (thing-at-point 'symbol) (substring-no-properties (thing-at-point 'symbol))))
+                   (completions (if arg kill
+                                  (remove nil(delete-dups
+                                              (list thing-at-point kill))))))
+              (if (use-region-p) (list region) (list (completing-read "Search term: " completions)))))
+           (websearch--browse-url search-term ,group-name))))))
 
 ;;;###autoload
 (defun websearch-browse-with (browse-url-function)
