@@ -187,7 +187,7 @@
 
 
 (unless noninteractive
-  (mapcar #'fmakunbound websearch-macro-tests-non-bound-functions)
+  (mapc #'fmakunbound websearch-macro-tests-non-bound-functions)
   (unless websearch-macro-tests-mode-backup
     (websearch-mode -1)))
 
