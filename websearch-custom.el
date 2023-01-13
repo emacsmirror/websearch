@@ -32,7 +32,7 @@
 
 
 (defcustom websearch-custom-engines
-  '(("anarchist-library"?+  "theanarchistlibrary.org/search?query=" (text archive))
+  '(("anarchistlibrary" ?+  "theanarchistlibrary.org/search?query=" (text archive))
     ("britannica"       ?\s "www.britannica.com/search?query=" (text dictionary))
     ("c++-docs"         ?+  "cplusplus.com/search.do?q=" (text))
     ("codeberg"         ?+  "codeberg.org/explore/repos?q=" (text code-forge))
