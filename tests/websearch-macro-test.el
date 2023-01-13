@@ -1,4 +1,5 @@
-;;; websearch-macro-test.el --- Macro tests for `websearch'  -*- lexical-binding: t; -*-
+;;; websearch-macro-test.el --- Macro tests for websearch  -*- lexical-binding: t; -*-
+
 
 ;; This file is part of websearch - query search engines from Emacs.
 ;; Copyright (c) 2022-2023, Maciej Barć <xgqt@riseup.net>
@@ -18,15 +19,22 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with websearch.  If not, see <https://www.gnu.org/licenses/>.
 
+
+
 ;;; Commentary:
 
-;; Tests for `websearch-define' and `websearch-define-group'
+;; Tests for `websearch-define' and `websearch-define-group'.
+
+
 
 ;;; Code:
+
+
 (require 'ert nil t)
 (require 'websearch nil t)
 (require 'websearch-custom nil t)
 (require 'websearch-mode nil t)
+
 
 (unless noninteractive
   (defvar websearch-macro-tests-custom-engines-backup websearch-custom-engines
@@ -60,25 +68,27 @@
 
   (mapcar #'websearch-macro-tests-function-bound-p websearch-macro-tests-functions))
 
+
 (websearch-mode 1)
+
 
 (ert-deftest websearch-macro-engine-add-test ()
   "Assert that engines are added to `websearch-custom-engines'."
   (websearch-define "brave"
-      :query-url "search.brave.com/search?q="
-      :query-separator ?+
-      :tags ("text" "generic")
-      :function nil)
+                    :query-url "search.brave.com/search?q="
+                    :query-separator ?+
+                    :tags ("text" "generic")
+                    :function nil)
   (websearch-define "emacs-stackexchange"
-      :query-url "emacs.stackexchange.com/search?q="
-      :query-separator ?+
-      :tags ("text" "generic")
-      :function nil)
+                    :query-url "emacs.stackexchange.com/search?q="
+                    :query-separator ?+
+                    :tags ("text" "generic")
+                    :function nil)
   (websearch-define "emacswiki"
-      :query-url "search.brave.com/search?q=site%3Aemacswiki.org+"
-      :query-separator ?+
-      :tags ("text" "generic")
-      :function nil)
+                    :query-url "search.brave.com/search?q=site%3Aemacswiki.org+"
+                    :query-separator ?+
+                    :tags ("text" "generic")
+                    :function nil)
   (should (assoc "brave" websearch-custom-engines))
   (should (assoc "emacs-stackexchange" websearch-custom-engines))
   (should (assoc "emacswiki" websearch-custom-engines)))
@@ -86,11 +96,11 @@
 (ert-deftest websearch-macro-group-add-test ()
   "Assert that groups are added to `websearch-custom-groups'."
   (websearch-define-group "google, reddit, youtube"
-      :function nil)
+                          :function nil)
   (websearch-define-group "youtube, odysee, peertube, dailymotion, yewtube"
-      :function nil)
+                          :function nil)
   (websearch-define-group "wolframalpha, wikipedia-en, anarchist-library"
-      :function nil)
+                          :function nil)
   (should (member "google, reddit, youtube" websearch-custom-groups))
   (should (member "youtube, odysee, peertube, dailymotion, yewtube" websearch-custom-groups))
   (should (member "wolframalpha, wikipedia-en, anarchist-library" websearch-custom-groups)))
@@ -123,17 +133,17 @@
 
 (ert-deftest websearch-macro-engine-keybound-p-test ()
   (websearch-define "brave"
-      :keybinding "~ b")
+                    :keybinding "~ b")
   (websearch-define "emacs-stackexchange"
-      :keybinding "~ E")
+                    :keybinding "~ E")
   (websearch-define "emacswiki"
-      :keybinding "~ e")
+                    :keybinding "~ e")
   (websearch-define "google"
-      :keybinding "~ g")
+                    :keybinding "~ g")
   (websearch-define "youtube"
-      :keybinding "~ y")
+                    :keybinding "~ y")
   (websearch-define "codeberg"
-      :keybinding "~ c")
+                    :keybinding "~ c")
   (should (eq (key-binding (kbd (format "%s %s " websearch-custom-keymap-prefix "~ b"))) 'websearch-brave))
   (should (eq (key-binding (kbd (format "%s %s " websearch-custom-keymap-prefix "~ E"))) 'websearch-emacs-stackexchange))
   (should (eq (key-binding (kbd (format "%s %s " websearch-custom-keymap-prefix "~ e"))) 'websearch-emacswiki))
@@ -143,23 +153,24 @@
 
 (ert-deftest websearch-macro-group-keybound-p-test ()
   (websearch-define-group "google, reddit, youtube"
-      :keybinding "! g")
+                          :keybinding "! g")
   (websearch-define-group "youtube, odysee, peertube, dailymotion, yewtube"
-      :keybinding "! y")
+                          :keybinding "! y")
   (websearch-define-group "wolframalpha, wikipedia-en, anarchist-library"
-      :keybinding "! w")
+                          :keybinding "! w")
   (websearch-define-group "codeberg, github, gitlab, repology, softwareheritage"
-      :keybinding "! c")
+                          :keybinding "! c")
   (websearch-define-group "google, duckduckgo, yandex"
-      :keybinding "! s")
+                          :keybinding "! s")
   (websearch-define-group "melpa, melpa-stable, repology"
-      :keybinding "! m")
+                          :keybinding "! m")
   (should (eq (key-binding (kbd (format "%s %s " websearch-custom-keymap-prefix "! g"))) 'websearch-group-google-reddit-youtube))
   (should (eq (key-binding (kbd (format "%s %s " websearch-custom-keymap-prefix "! y"))) 'websearch-group-youtube-odysee-peertube-dailymotion-yewtube))
   (should (eq (key-binding (kbd (format "%s %s " websearch-custom-keymap-prefix "! w"))) 'websearch-group-wolframalpha-wikipedia-en-anarchist-library))
   (should (eq (key-binding (kbd (format "%s %s " websearch-custom-keymap-prefix "! c"))) 'websearch-group-codeberg-github-gitlab-repology-softwareheritage))
   (should (eq (key-binding (kbd (format "%s %s " websearch-custom-keymap-prefix "! s"))) 'websearch-group-google-duckduckgo-yandex))
   (should (eq (key-binding (kbd (format "%s %s " websearch-custom-keymap-prefix "! m"))) 'websearch-group-melpa-melpa-stable-repology)))
+
 
 (define-key websearch-mode-map (kbd (format "%s %s " websearch-custom-keymap-prefix "~ b")) nil)
 (define-key websearch-mode-map (kbd (format "%s %s " websearch-custom-keymap-prefix "~ E")) nil)
@@ -174,10 +185,15 @@
 (define-key websearch-mode-map (kbd (format "%s %s " websearch-custom-keymap-prefix "! s")) nil)
 (define-key websearch-mode-map (kbd (format "%s %s " websearch-custom-keymap-prefix "! m")) nil)
 
+
 (unless noninteractive
   (mapcar #'fmakunbound websearch-macro-tests-non-bound-functions)
   (unless websearch-macro-tests-mode-backup
     (websearch-mode -1)))
 
+
 (provide 'websearch-macro-test)
+
+
+
 ;;; websearch-macro-test.el ends here
