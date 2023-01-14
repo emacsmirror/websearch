@@ -9,6 +9,7 @@ variables:
 stages:
   - build
   - install
+  - test
 
 image: debian:unstable
 
@@ -42,3 +43,15 @@ install:
 
   script:
     - make install
+
+
+test:
+  stage: test
+  rules:
+    - changes:
+      - "*.el"
+      - .gitlab-ci.yml
+      - Makefile
+
+  script:
+    - make test
