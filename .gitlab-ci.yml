@@ -8,32 +8,18 @@ variables:
 
 stages:
   - build
-  - install
   - test
 
 image: debian:unstable
 
 before_script:
-  - apt update
-  - apt install -y emacs-nox make
+  - apt update && apt install -y emacs-nox make
   - mkdir -p ~/.emacs.d
 
 
-build:
-  stage: build
-
-  rules:
-    - changes:
-      - "*.el"
-      - .gitlab-ci.yml
-      - Makefile
-
-  script:
-    - make
-
-
 install:
-  stage: install
+  stage: build
+  timeout: 10 minutes
 
   rules:
     - changes:
@@ -47,6 +33,8 @@ install:
 
 test:
   stage: test
+  timeout: 10 minutes
+
   rules:
     - changes:
       - "*.el"
