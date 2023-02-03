@@ -5,7 +5,7 @@ ELS          = $(wildcard $(PWD)/*.el)
 ELCS         = $(ELS:.el=.elc)
 
 EMACS       := emacs
-FIND        := rm -f
+RM          := rm -f
 
 EMACFLAGS   := --batch -q --no-site-file -L $(PWD)
 EMACSCMD     = $(EMACS) $(EMACFLAGS)
