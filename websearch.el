@@ -54,9 +54,10 @@
 ;;; Code:
 
 
+(require 'browse-url)
 (require 'cl-lib)
 (require 'subr-x)
-(require 'browse-url)
+
 (require 'websearch-custom)
 
 
