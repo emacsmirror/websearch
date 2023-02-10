@@ -22,7 +22,7 @@
 
 ;; Author: Maciej Barć <xgqt@riseup.net>
 ;; Homepage: https://gitlab.com/xgqt/emacs-websearch/
-;; Version: 2.0.1
+;; Version: 2.1.0
 ;; Keywords: convenience hypermedia
 ;; Package-Requires: ((emacs "24.4"))
 ;; SPDX-License-Identifier: GPL-2.0-or-later
@@ -69,7 +69,7 @@
   :group 'web)
 
 
-(defconst websearch-version "2.0.0"
+(defconst websearch-version "2.1.0"
   "Search-Engine package version.")
 
 (defconst websearch-methods
