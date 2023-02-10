@@ -31,6 +31,8 @@
 ;;; Code:
 
 
+(require 'easymenu)
+
 (require 'websearch-custom)
 (require 'websearch)
 
@@ -52,6 +54,16 @@
         (cons (websearch-mode--kbd "t") #'websearch-term)
         (cons (websearch-mode--kbd "s") #'websearch))
   :group 'websearch)
+
+(easy-menu-define websearch-mode-menu websearch-mode-map
+  "Menu for `websearch-mode'."
+  '("websearch"
+    ["Query interactively" websearch]
+    ["Query from point" websearch-point]
+    ["Query from region" websearch-region]
+    ["Query from kill-ring" websearch-kill-ring]
+    ["Query from a term" websearch-term]
+    ["Set browsing function" websearch-browse-with]))
 
 (define-derived-mode websearch-engines-mode tabulated-list-mode
   "WebSearch Engines"
