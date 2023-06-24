@@ -213,7 +213,13 @@ The list of possible selections is defined by ‘websearch-methods’."
 
 
 ;;;###autoload
-(cl-defmacro websearch-define (engine-name &key docstring keybinding (function t) query-separator query-url (tags '("generic")))
+(cl-defmacro websearch-define (engine-name &key
+                                           docstring
+                                           keybinding
+                                           (function t)
+                                           query-separator
+                                           query-url
+                                           (tags '("generic")))
   "Define a dwim function to search the web using `websearch'.
 Unless called with FUNCTION as nil, then only add to `websearch-custom-engines'
 It will call `websearch' with the selected region, or if no region is selected
@@ -272,7 +278,10 @@ When called with prefix ARG use `kill-ring' for completions"
            (websearch--browse-url search-term ,engine-name))))))
 
 ;;;###autoload
-(cl-defmacro websearch-define-group (group-name &key keybinding (function t) docstring)
+(cl-defmacro websearch-define-group (group-name &key
+                                                keybinding
+                                                (function t)
+                                                docstring)
   "Define a new function for searching a group of web engines using `websearch'.
 function.  The function takes the following keyword arguments:
 
