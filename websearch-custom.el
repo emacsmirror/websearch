@@ -134,7 +134,8 @@ Can be set to any name of a search engine from ‘websearch-custom-engines’."
     browse-url-generic
     browse-url-firefox
     browse-url-chromium
-    browse-url-chrome)
+    browse-url-chrome
+    xwidget-webkit-browse-url)
   "Candidates to browse a full query URL with."
   :type '(repeat symbol)
   :group 'websearch)
