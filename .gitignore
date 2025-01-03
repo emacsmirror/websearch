@@ -1,8 +1,28 @@
-*.elc
-*.~undo-tree
-*~
-flycheck_*
+# Documentation: https://git-scm.com/docs/gitignore
 
-.cask/
-.eldev/
-dist/
+*.exe
+*.log
+*.tar*
+*.zip*
+*~
+.~lock.*
+Thumbs.db
+wget-log*
+
+/Build/
+/public/
+
+.cache/
+.fake/
+.log/
+.vscode/
+bin/
+build/
+compiled/
+node_modules/
+obj/
+
+!/.devcontainer/
+!/.vscode/
+!/.vscode/launch.json
+!/.vscode/tasks.json

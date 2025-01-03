@@ -1,25 +1,26 @@
 # Emacs-WebSearch
 
 <p align="center">
-  <a href="https://melpa.org/#/websearch">
-    <img src="https://melpa.org/packages/websearch-badge.svg">
-  </a>
-  <a href="https://stable.melpa.org/#/websearch">
-    <img src="https://stable.melpa.org/packages/websearch-badge.svg">
-  </a>
-  <a href="https://archive.softwareheritage.org/browse/origin/?origin_url=https://gitlab.com/xgqt/emacs-websearch">
-    <img src="https://archive.softwareheritage.org/badge/origin/https://gitlab.com/xgqt/emacs-websearch/">
-  </a>
-  <a href="https://gitlab.com/xgqt/emacs-websearch/pipelines">
-    <img src="https://gitlab.com/xgqt/emacs-websearch/badges/master/pipeline.svg">
-  </a>
+    <a href="https://melpa.org/#/websearch">
+        <img src="https://melpa.org/packages/websearch-badge.svg">
+    </a>
+    <a href="https://stable.melpa.org/#/websearch">
+        <img src="https://stable.melpa.org/packages/websearch-badge.svg">
+    </a>
+    <a href="https://archive.softwareheritage.org/browse/origin/?origin_url=https://gitlab.com/xgqt/emacs-websearch">
+        <img src="https://archive.softwareheritage.org/badge/origin/https://gitlab.com/xgqt/emacs-websearch/">
+    </a>
+    <a href="https://gitlab.com/xgqt/emacs-websearch/pipelines">
+        <img src="https://gitlab.com/xgqt/emacs-websearch/badges/master/pipeline.svg">
+    </a>
 </p>
 
 Query search engines from Emacs.
 
 <p align="center">
-  <img src="logo.png" width="250" height="250">
+    <img src="logo.png" width="250" height="250">
 </p>
+
 
 ## About
 
@@ -150,24 +151,8 @@ or an engine-group to (`websearch-custom-groups') without creating a function
 
 ## License
 
-    This file is part of xgqt-elisp-lib-websearch - query search engines from Emacs.
-    Copyright (c) 2022-2015, Maciej Barć <xgqt@xgqt.org>
-    Licensed under the GNU GPL v2 License
+Copyright (c) 2022-2023, Maciej Barć <xgqt@riseup.net>
 
-    xgqt-elisp-lib-websearch is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 2 of the License, or
-    (at your option) any later version.
+Licensed under the GNU GPL v2 License
 
-    xgqt-elisp-lib-websearch is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with xgqt-elisp-lib-websearch.  If not, see <https://www.gnu.org/licenses/>.
-    Copyright (c) 2022-2025, Maciej Barć <xgqt@riseup.net>
-
-    Licensed under the GNU GPL v2 License
-
-    SPDX-License-Identifier: GPL-2.0-or-later
+SPDX-License-Identifier: GPL-2.0-or-later

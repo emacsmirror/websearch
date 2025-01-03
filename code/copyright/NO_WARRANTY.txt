@@ -1,0 +1,21 @@
+In addition to included licenses:
+
+The software is provided "as is," without any warranty or guarantee of any
+kind, either expressed or implied. The developers and contributors expressly
+disclaim all warranties of merchantability, fitness for a particular purpose,
+and non-infringement. The entire risk arising out of the use or performance of
+the software remains with you.
+
+In no event shall the developers or contributors be liable for any direct,
+indirect, incidental, special, exemplary, or consequential damages (including,
+but not limited to, procurement of substitute goods or services, loss of use,
+data, or profits, or business interruption) arising in any way out of the use
+or performance of the software, even if advised of the possibility of such
+damage.
+
+While developers and contributors strive to provide a useful and reliable
+software product, they do not warrant that the software will be entirely
+compatible with your specific hardware, software, or operating system
+environment. Furthermore, the performance of the software may vary depending on
+these factors, and no guarantees are made regarding its performance under all
+circumstances.

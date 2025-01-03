@@ -1,0 +1,17 @@
+[tool.tbump.version]
+current = "0.0.0"
+regex = '''
+  (?P<major>\d+)
+  \.
+  (?P<minor>\d+)
+  \.
+  (?P<patch>\d+)
+  '''
+
+[tool.tbump.git]
+message_template = "chore: bump to {new_version}"
+tag_template = "{new_version}"
+
+[[tool.tbump.file]]
+src = "./VERSION"
+search = "{current_version}"

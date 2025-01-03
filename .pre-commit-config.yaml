@@ -1,0 +1,55 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+
+---
+repos:
+  # Enforce that commit messages allow for later CHANGELOG.md generation.
+  # Requires that commitizen is already installed.
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v3.25.0
+    hooks:
+      - id: commitizen
+        stages:
+          - commit-msg
+
+  # Additional hooks from XGQT.
+  - repo: "https://gitlab.com/xgqt/xgqt-precommit-lib-hooks"
+    rev: 1.1.0
+    hooks:
+      - id: format-elisp
+      - id: format-nix
+
+  # Check makefiles
+  - repo: "https://github.com/mrtazz/checkmake"
+    rev: 0.2.2
+    hooks:
+      - id: checkmake
+
+  # Check shell scripts
+  - repo: "https://github.com/shellcheck-py/shellcheck-py"
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+
+  # Standard pre-commit hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-byte-order-marker
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: trailing-whitespace
+
+      - id: check-json
+      - id: check-toml
+      - id: check-xml
+      - id: check-yaml
+      - id: check-vcs-permalinks
+
+      - id: pretty-format-json
+        args: ["--autofix", "--indent", "2", "--no-ensure-ascii", "--no-sort-keys"]
+
+  - repo: meta
+    hooks:
+      - id: check-useless-excludes
