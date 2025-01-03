@@ -1,0 +1,1 @@
+(websearch :fetcher gitlab :repo "xgqt/xgqt-elisp-lib-websearch" :files ("code/source/v2/websearch-app/src/main/elisp/websearch/*"))
