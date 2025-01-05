@@ -22,6 +22,7 @@ all:
 	$(MAKE) compile
 
 clean-%:
+	$(FIND) $(SRCDIR)/$(*) -iname "*-autoloads.el" -delete
 	$(FIND) $(SRCDIR)/$(*) -iname "*.elc" -delete
 
 .PHONY: clean
