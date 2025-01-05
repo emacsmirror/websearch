@@ -1,0 +1,19 @@
+;; -*- mode: emacs-lisp; lexical-binding: t -*-
+
+;; Documentation: https://emacs-eldev.github.io/eldev/
+
+(setf eldev-project-source-dirs
+      '("src/main/elisp/websearch" "src/test/elisp/websearch"))
+
+(setf eldev-project-main-file "websearch.el")
+
+(setf eldev-test-framework '(ert))
+(setf eldev-test-fileset '("*-test.el"))
+
+(eldev-require-version "1.10.0")
+
+(eldev-use-package-archive 'melpa)
+
+(eldev-use-plugin 'autoloads)
+(eldev-use-plugin 'maintainer)
+(eldev-use-plugin 'undercover)
