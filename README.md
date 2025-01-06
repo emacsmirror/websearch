@@ -7,12 +7,6 @@
   <a href="https://stable.melpa.org/#/websearch">
     <img src="https://stable.melpa.org/packages/websearch-badge.svg">
   </a>
-  <a href="https://archive.softwareheritage.org/browse/origin/?origin_url=https://gitlab.com/xgqt/emacs-websearch">
-    <img src="https://archive.softwareheritage.org/badge/origin/https://gitlab.com/xgqt/emacs-websearch/">
-  </a>
-  <a href="https://gitlab.com/xgqt/emacs-websearch/pipelines">
-    <img src="https://gitlab.com/xgqt/emacs-websearch/badges/master/pipeline.svg">
-  </a>
 </p>
 
 Query search engines from Emacs.
@@ -150,6 +144,8 @@ or an engine-group to (`websearch-custom-groups') without creating a function
 
 ## License
 
+SPDX-License-Identifier: GPL-2.0-or-later
+
     This file is part of xgqt-elisp-lib-websearch - query search engines from Emacs.
     Copyright (c) 2022-2015, Maciej Barć <xgqt@xgqt.org>
     Licensed under the GNU GPL v2 License
@@ -166,8 +162,3 @@ or an engine-group to (`websearch-custom-groups') without creating a function
 
     You should have received a copy of the GNU General Public License
     along with xgqt-elisp-lib-websearch.  If not, see <https://www.gnu.org/licenses/>.
-    Copyright (c) 2022-2025, Maciej Barć <xgqt@riseup.net>
-
-    Licensed under the GNU GPL v2 License
-
-    SPDX-License-Identifier: GPL-2.0-or-later
