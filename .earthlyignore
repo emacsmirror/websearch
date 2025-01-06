@@ -3,18 +3,16 @@
 **/.cache/
 **/.devcontainer/
 **/.fake/
-**/.git/
 **/.idea/
 **/.log/
 **/.vs/
 **/.vscode/
-**/Copyright/
-**/bin/
 **/build/
 **/compiled/
 **/node_modules/
 **/obj/
 
+**/*-autoloads.el
 **/.dir-locals.el
 **/.editorconfig
 **/.gitattributes
@@ -22,7 +20,10 @@
 **/.gitlab-ci.yml
 **/.gitmodules
 **/.mailmap
-**/.pre-commit-config.yaml
 **/CODE_OF_CONDUCT.txt
 **/Jenkinsfile
 **/renovate.json
+
+!/.git/
+
+!/.pre-commit-config.yaml
