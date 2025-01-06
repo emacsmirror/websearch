@@ -1,0 +1,37 @@
+# -*- makefile -*-
+
+# Copyright (c) 2022-2025, Maciej Barć <xgqt@xgqt.org>
+
+# Needed before sourcing:
+3RD-PARTY-BIN   ?=
+
+MAKE            ?= make
+SH              ?= sh
+
+WHICH            = command -v
+
+_CAT             = $(shell $(WHICH) cat)
+_CP              = $(shell $(WHICH) cp)
+_DIRNAME         = $(shell $(WHICH) dirname)
+_LN              = $(shell $(WHICH) ln)
+_MD              = $(shell $(WHICH) mkdir)
+_REALPATH        = $(shell $(WHICH) realpath)
+_RM              = $(shell $(WHICH) rm)
+_TOUCH           = $(shell $(WHICH) touch)
+
+CAT             := $(_CAT)
+CP              := $(_CP)
+DIRNAME         := $(_DIRNAME)
+LN              := $(_LN) -f -s
+MD              := $(_MD) -p
+REALPATH        := $(_REALPATH)
+RM              := $(_RM) -f -r
+TOUCH           := $(_TOUCH)
+
+FIND            := $(shell $(WHICH) find)
+TAR             := $(shell $(WHICH) bsdtar)
+
+EMACS           := $(shell $(WHICH) emacs)
+
+ELDEV           := $(shell $(REALPATH) $(3RD-PARTY-BIN)/eldev)
+PRE-COMMIT      := $(shell $(REALPATH) $(3RD-PARTY-BIN)/pre-commit)
