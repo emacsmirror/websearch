@@ -1,0 +1,6 @@
+[submodule "code/source/v3/3rd-party/xo-depot-tools"]
+	path = code/source/v3/3rd-party/xo-depot-tools
+	url = https://gitlab.com/xgqt/xgqt-misc-lib-xo-depot-tools
+[submodule "code/source/v3/3rd-party/eldev"]
+	path = code/source/v3/3rd-party/eldev
+	url = https://github.com/emacs-eldev/eldev
