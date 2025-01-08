@@ -33,5 +33,5 @@ TAR             := $(shell $(WHICH) bsdtar)
 
 EMACS           := $(shell $(WHICH) emacs)
 
-ELDEV           := $(shell $(REALPATH) $(3RD-PARTY-BIN)/eldev)
-PRE-COMMIT      := $(shell $(REALPATH) $(3RD-PARTY-BIN)/pre-commit)
+ELDEV           := $(3RD-PARTY-BIN)/eldev
+PRE-COMMIT      := $(3RD-PARTY-BIN)/pre-commit
