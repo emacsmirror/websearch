@@ -239,7 +239,7 @@ i.e. \":tags (\"text\" \"generic\")\""
   (let* ((engine-name-sym (intern engine-name))
          (tagp (string-match-p "#" engine-name))
          (query-separator (when query-separator query-separator))
-         (tags (when tags (mapcar 'intern tags)))
+         (tags (when tags (mapcar #'intern tags)))
          (engine-list (list engine-name query-separator query-url tags))
          (engine-group  (string-match-p "," engine-name))
          (func-name (concat "websearch-" (replace-regexp-in-string ", \\|," "-" engine-name)))
