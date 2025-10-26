@@ -1,7 +1,7 @@
 ;;; websearch-mode.el --- Minor mode for websearch -*- lexical-binding: t -*-
 
 ;; This file is part of xgqt-elisp-lib-websearch - query search engines from Emacs.
-;; Copyright (c) 2022-2015, Maciej Barć <xgqt@xgqt.org>
+;; Copyright (c) 2022-2025, Maciej Barć <xgqt@xgqt.org>
 ;; Licensed under the GNU GPL v2 License
 ;;
 ;; xgqt-elisp-lib-websearch is free software: you can redistribute it and/or modify
