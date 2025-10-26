@@ -81,13 +81,11 @@ Each element in this list is a list of four elements:
 - query URL (without \"https://\" prefix), string,
   for example: \"duckduckgo.com/?q=\" or \"en.wikipedia.org/wiki/\"
 - tags, list of symbols,
-  tags should be as genral as possible but at the same time as \"specialized\"
-  as possible.
-  Because they are used to search all sources at once it would make little
-  sense to, for example, search both python & racket package repositories
-  when using a \"packages\" tag.
-  For example: (dictionary), (video).
-  Actually '(dictionary), but the search engines list is already quoted."
+  tags could be general or concrete.
+  But be aware that because they are used to search all sources at
+  once it would make little sense to, for example, search both python
+  and racket package repositories when using the \"packages\" tag.
+  For example: (dictionary), (video)."
   :type '(repeat (list string character string (repeat symbol)))
   :group 'websearch)
 
