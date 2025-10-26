@@ -230,7 +230,7 @@ The function will be named websearch-ENGINE-NAME where ENGINE-NAME
 corresponds to an item from `websearch-custom-engines'
 DOCSTRING if supplied is applied to the variable.
 If KEYBINDING is given bind the function to KEYBINDING.
-If QUERY-SEPARATOR QUERY-URL and TAGS are given add them to
+If QUERY-SEPARATOR, QUERY-URL and TAGS are given add them to
 `websearch-custom-engines' TAGS should be passed as an unquoted list
 i.e. \":tags (\"text\" \"generic\")\""
   (declare (indent 2)
@@ -282,17 +282,13 @@ When called with prefix ARG use `kill-ring' for completions"
                                                 (function t)
                                                 docstring)
   "Define a new function for searching a group of web engines using `websearch'.
-function.  The function takes the following keyword arguments:
-
-GROUP-NAME: a string that contains a list of engine names separated by
-commas (e.g. \"google, duckduckgo, yandex\").
-
-KEYBINDING: (OPTIONAL) A KEYBINDING TO BIND THE FUNCTION TO.
-
-FUNCTION: (optional) a boolean that specifies whether the function should be
+The function takes the following keyword arguments:
+GROUP-NAME is a string that contains a list of engine names separated by
+commas, e.g.: \"google, duckduckgo, yandex\".
+KEYBINDING (optional) is a keybinding to bind the function to.
+FUNCTION (optional) is a boolean that specifies whether the function should be
 defined (defaults to t).
-
-DOCSTRING: (optional) a string that is used as the function's documentation.
+DOCSTRING (optional) is a string that is used as the function's documentation.
 
 The macro first checks if the GROUP-NAME is properly formatted (i.e. that it
 contains a comma) and if the group is already defined in
